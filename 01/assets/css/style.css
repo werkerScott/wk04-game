@@ -1,0 +1,34 @@
+/* CSS file */
+
+#crystalContainer {
+	height: 70px;
+}
+
+div.crystal {
+	width: 70px;
+	height: 70px;
+	display:inline-block;
+
+
+}
+
+#crystal-01 {
+	background-image: url("../images/crystal-01.png");
+	background-repeat: no-repeat;
+}
+
+#crystal-02 {
+	background-image: url("../images/crystal-02.png");
+	background-repeat: no-repeat;
+}
+
+#crystal-03 {
+	background-image: url("../images/crystal-03.png");
+	background-repeat: no-repeat;
+}
+
+#crystal-04 {
+	background-image: url("../images/crystal-04.png");
+	background-repeat: no-repeat;
+}
+
