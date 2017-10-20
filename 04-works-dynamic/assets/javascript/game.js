@@ -1,8 +1,8 @@
-// This version of crystal collector dynamically writes HTML to the page according to guide
-/////////  START document ready wrapper  ////////////////
+// Javascript file
+
 $(document).ready(function() {
 
-/////////  global  ////////////////
+/////////  global ////////////////
 	var totalWins = 0;
 	var totalLoses = 0;
 	var total_countComputer;
@@ -13,20 +13,20 @@ $(document).ready(function() {
 	var crystal_array;	
 	var crystalSetter=true;
 	
-/////////  START functions ////////////////
-	// new game initalizez and re-initializes
+/////////  functions ////////////////
+	// resets
+
 
 	function newGame() {
-		// console.log("newGame fired");
-		// do not understand why this works, when also commenting out crystalSetter in set_crystals below, BUT removes click event detection
+		console.log("newGame fired");
+		// do not understand why this works, when removing crystalSetter below, but removes click event detection
 		// $( "img" ).remove( ".crystal-image" );
 		getRandom();
-		set_crystals();
+		setCrystals();
 		set_total_countComputer();
 		set_total_countUser();
+
 	};
-
-
 
 
 	function getRandom(arr1, arr2) {
@@ -36,9 +36,8 @@ $(document).ready(function() {
 	};
 
 
-
-	function set_crystals() {
-		// console.log("set_crystals fired");
+	function setCrystals() {
+		console.log("setCrystals fired");
 		crystal_array = [];
 		// get random numbers until array is filled with total number of crystals
 		for ( var i = 0; i < totalCrystals; i++ ) {
@@ -50,21 +49,19 @@ $(document).ready(function() {
 				// create div with class crystalSetter=0and value defined in data-crystalvalue markup
 				var imageCrystal = $("<img>");
 				imageCrystal.addClass("crystal-image");
-				// tried using a switch but didn't get it to work
-
 				if (crystal_array[0] && (crystalSetter) ) { imageCrystal.attr("src", "assets/images/crystal-01.png"); }
 				if (crystal_array[1] && (crystalSetter) ) { imageCrystal.attr("src", "assets/images/crystal-02.png"); }
 				if (crystal_array[2] && (crystalSetter) ) { imageCrystal.attr("src", "assets/images/crystal-03.png"); }
 				if (crystal_array[3] && (crystalSetter) ) { 
 					imageCrystal.attr("src", "assets/images/crystal-04.png");
-					//supress adding images to the page after initial writing, had to add this because use of jquery remove also removed detection of click events
+					//supress adding images to the page after initial writing, had to add this because use of remove also removed detection of click events
 					crystalSetter=false; 
 				}
     			imageCrystal.attr("data-crystalvalue", parseInt(crystal_array[i]));
     			$("#crystals").append(imageCrystal);
 			// if it does exist, then don't push it and don't let the loop index advance
 			} else {i--}
-			// console.log(crystal_array);
+			console.log(crystal_array);
 		};	
 		
 	};
@@ -98,14 +95,19 @@ $(document).ready(function() {
 			$( "#display_totalLoses" ).text(totalLoses);
 			//console.log("lost fired");
 			newGame();
+			
 		}
 		// still playing
 		else { return; }
 	};
 
 
-
-	function mainLoop () {
+/////////  end functions to be called ////////////////
+/////////  start run game             ////////////////
+// new games runs once
+	newGame();
+	
+	
 		$(".crystal-image").on("click", function() {
 			console.log("button fired");
 			//  get value from clicked image
@@ -117,16 +119,7 @@ $(document).ready(function() {
 			//  check status
 			checkStatus();
 		});
-
-	};
-/////////  END functions  ////////////////
-/////////  START run game  ////////////////
-
-// new games runs once
-	newGame();
-// calls new game each round and contains event handlers	
-	mainLoop();
 	
-/////////  END run game  ////////////////
-/////////  END document ready wrapper  ////////////////
+/////////  end run game ////////////////
+
  });
